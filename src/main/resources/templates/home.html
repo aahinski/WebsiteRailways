@@ -8,6 +8,9 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 <div class="container mt-5">
     <h1>AA Railways</h1>
 </div>

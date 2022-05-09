@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+Add new user
+{{#message}}
+    {{message}}
+{{/message}}
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<form th:action="@{/registration}" method="post">
+    <div><label> User Name : <input type="text" name="userName"/> </label></div>
+    <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="Sign Up"/></div>
+</form>
+</body>
+</html>
