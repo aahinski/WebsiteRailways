@@ -1,8 +1,8 @@
 package com.ahinski.website.repo;
 
 import com.ahinski.website.models.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends CrudRepository<User, Long> {
-    User findByUserName(String username);
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 }

@@ -14,9 +14,20 @@ public class Ticket {
 
     private Long trainId;
     private String departureStation;
-    private String departureTime;
     private String arrivalStation;
-    private String arrivalTime;
+    private Long cost;
+    private Long userId;
+
+    public Ticket() {}
+
+    public Ticket(Long id, Long trainId, String departureStation, String arrivalStation, Long cost, Long userId) {
+        this.id = id;
+        this.trainId = trainId;
+        this.departureStation = departureStation;
+        this.arrivalStation = arrivalStation;
+        this.cost = cost;
+        this.userId = userId;
+    }
 
     public Long getId() {
         return id;
@@ -42,14 +53,6 @@ public class Ticket {
         this.departureStation = departureStation;
     }
 
-    public String getDepartureTime() {
-        return departureTime;
-    }
-
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
-    }
-
     public String getArrivalStation() {
         return arrivalStation;
     }
@@ -58,11 +61,19 @@ public class Ticket {
         this.arrivalStation = arrivalStation;
     }
 
-    public String getArrivalTime() {
-        return arrivalTime;
+    public Long getCost() {
+        return cost;
     }
 
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setCost(Long cost) {
+        this.cost = cost;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
