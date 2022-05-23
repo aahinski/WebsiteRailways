@@ -1,68 +1,36 @@
 package com.ahinski.website.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Route {
-
-    private class StationExtension {
-
-        private Station station;
-        private Long cost;
-        private Long time;
-
-        public Station getStation() {
-            return station;
-        }
-
-        public void setStation(Station station) {
-            this.station = station;
-        }
-
-        public Long getCost() {
-            return cost;
-        }
-
-        public void setCost(Long cost) {
-            this.cost = cost;
-        }
-
-        public Long getTime() {
-            return time;
-        }
-
-        public void setTime(Long time) {
-            this.time = time;
-        }
-
-        public StationExtension() {}
-
-        public StationExtension(Station station, Long cost, Long time) {
-            this.station = station;
-            this.cost = cost;
-            this.time = time;
-        }
-
-    }
+@Table(name = "routes")
+public class Route implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
-    private List<StationExtension> stations;
 
-    public Route(Long id, String name, List<StationExtension> stations) {
-        this.id = id;
-        this.name = name;
-        this.stations = stations;
-    }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "route_id")
+    private List<StationInformation> stationInformationList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "route_id")
+    private List<Train> trains = new ArrayList<>();
 
     public Route() {}
+
+    public Route(Long id, String name, List<StationInformation> stationInformationList, List<Train> trains) {
+        this.id = id;
+        this.name = name;
+        this.stationInformationList = stationInformationList;
+        this.trains = trains;
+    }
 
     public Long getId() {
         return id;
@@ -80,11 +48,19 @@ public class Route {
         this.name = name;
     }
 
-    public List<StationExtension> getStations() {
-        return stations;
+    public List<StationInformation> getStationInformationList() {
+        return stationInformationList;
     }
 
-    public void setStations(List<StationExtension> stations) {
-        this.stations = stations;
+    public void setStationInformationList(List<StationInformation> stationInformationList) {
+        this.stationInformationList = stationInformationList;
+    }
+
+    public List<Train> getTrains() {
+        return trains;
+    }
+
+    public void setTrains(List<Train> trains) {
+        this.trains = trains;
     }
 }

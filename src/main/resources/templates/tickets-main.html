@@ -12,6 +12,7 @@
     <h1>Tickets</h1>
     <div th:each="el : ${tickets}" class="alert alert-info mt-2">
         <h3 th:text="${el.id}"/>
+        <a th:ref="'/stations/'+${el.id}" class="btn btn-warning">Подробнее</a>
     </div>
 
 </div>

@@ -12,21 +12,17 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long trainId;
-    private String departureStation;
-    private String arrivalStation;
+    private Long departureStationId;
+    private Long arrivalStationId;
     private Long cost;
-    private Long userId;
 
     public Ticket() {}
 
-    public Ticket(Long id, Long trainId, String departureStation, String arrivalStation, Long cost, Long userId) {
+    public Ticket(Long i, Long departureStationId, Long arrivalStationId, Long cost) {
         this.id = id;
-        this.trainId = trainId;
-        this.departureStation = departureStation;
-        this.arrivalStation = arrivalStation;
+        this.departureStationId = departureStationId;
+        this.arrivalStationId = arrivalStationId;
         this.cost = cost;
-        this.userId = userId;
     }
 
     public Long getId() {
@@ -37,28 +33,20 @@ public class Ticket {
         this.id = id;
     }
 
-    public Long getTrainId() {
-        return trainId;
+    public Long getDepartureStationId() {
+        return departureStationId;
     }
 
-    public void setTrainId(Long trainId) {
-        this.trainId = trainId;
+    public void setDepartureStationId(Long departureStationId) {
+        this.departureStationId = departureStationId;
     }
 
-    public String getDepartureStation() {
-        return departureStation;
+    public Long getArrivalStationId() {
+        return arrivalStationId;
     }
 
-    public void setDepartureStation(String departureStation) {
-        this.departureStation = departureStation;
-    }
-
-    public String getArrivalStation() {
-        return arrivalStation;
-    }
-
-    public void setArrivalStation(String arrivalStation) {
-        this.arrivalStation = arrivalStation;
+    public void setArrivalStationId(Long arrivalStationId) {
+        this.arrivalStationId = arrivalStationId;
     }
 
     public Long getCost() {
@@ -67,13 +55,5 @@ public class Ticket {
 
     public void setCost(Long cost) {
         this.cost = cost;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }

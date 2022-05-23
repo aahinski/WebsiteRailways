@@ -1,9 +1,8 @@
 package com.ahinski.website.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Station {
@@ -15,6 +14,10 @@ public class Station {
     private String name;
     private String photo;
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "station_id")
+    private List<StationInformation> stationInformationList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -46,5 +49,13 @@ public class Station {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<StationInformation> getStationInformationList() {
+        return stationInformationList;
+    }
+
+    public void setStationInformationList(List<StationInformation> stationInformationList) {
+        this.stationInformationList = stationInformationList;
     }
 }

@@ -1,6 +1,8 @@
 package com.ahinski.website.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,6 +19,21 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private List<Ticket> tickets = new ArrayList<>();
+
+    public User() {}
+
+    public User(Long id, String username, String password, boolean active, Set<Role> roles, List<Ticket> tickets) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.roles = roles;
+        this.tickets = tickets;
+    }
 
     public Long getId() {
         return id;
@@ -56,5 +73,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

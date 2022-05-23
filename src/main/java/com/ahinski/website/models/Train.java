@@ -1,10 +1,9 @@
 package com.ahinski.website.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Train {
@@ -13,13 +12,16 @@ public class Train {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long routeId;
     private Date date;
 
-    public Train(Long id, Long routeId, Date date) {
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "train_id")
+    private List<Ticket> tickets = new ArrayList<>();
+
+    public Train(Long id, Date date, List<Ticket> tickets) {
         this.id = id;
-        this.routeId = routeId;
         this.date = date;
+        this.tickets = tickets;
     }
 
     public Train() {}
@@ -32,19 +34,19 @@ public class Train {
         this.id = id;
     }
 
-    public Long getRouteId() {
-        return routeId;
-    }
-
-    public void setRouteId(Long routeId) {
-        this.routeId = routeId;
-    }
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }
