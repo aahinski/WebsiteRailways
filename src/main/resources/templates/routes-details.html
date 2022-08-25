@@ -9,13 +9,13 @@
 <header th:insert="blocks/header :: header"></header>
 
 <div class="container mt-5">
-    <h1>Stations</h1>
-    <div th:each="el : ${stations}" class="alert alert-info mt-2">
+    <div th:each="el : ${route}" class="alert alert-info mt-2">
         <h3 th:text="${el.name}"/>
-        <img th:src="@{${el.photo}}" width="150" height="100">
-        <a class="btn btn-warning" th:href="'/stations/'+${el.id}" >Подробнее</a>
+        <tr th:each="s,iterStat : ${station}">
+            <td th:text="${s.cost}">Cost</td>
+            <td th:text="${names[__${iterStat.index}__].name}"></td>
+        </tr>
     </div>
-
 </div>
 
 </body>

@@ -10,10 +10,9 @@
 
 <div class="container mt-5">
     <h1>Stations</h1>
-    <div th:each="el : ${stations}" class="alert alert-info mt-2">
+    <div th:each="el : ${routes}" class="alert alert-info mt-2">
         <h3 th:text="${el.name}"/>
-        <img th:src="@{${el.photo}}" width="150" height="100">
-        <a class="btn btn-warning" th:href="'/stations/'+${el.id}" >Подробнее</a>
+        <a class="btn btn-warning" th:href="'/routes/'+${el.id}" >Подробнее</a>
     </div>
 
 </div>

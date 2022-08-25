@@ -1,6 +1,7 @@
 package com.ahinski.website.controllers;
 
 import com.ahinski.website.models.Station;
+import com.ahinski.website.repo.RouteRepository;
 import com.ahinski.website.repo.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class StationsController {
 
     @Autowired
     private StationRepository stationRepository;
+
+    @Autowired
+    private RouteRepository routeRepository;
 
     @GetMapping("/stations")
     public String stationsMain(Model model) {

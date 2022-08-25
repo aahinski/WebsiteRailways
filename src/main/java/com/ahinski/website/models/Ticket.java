@@ -1,9 +1,6 @@
 package com.ahinski.website.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Ticket {
@@ -12,18 +9,27 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long departureStationId;
-    private Long arrivalStationId;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="departure_station_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private StationInformation departureStationId;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="train_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Train train;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="arrival_station_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private StationInformation arrivalStationId;
+
     private Long cost;
+    private String firstName;
+    private String secondName;
 
     public Ticket() {}
-
-    public Ticket(Long i, Long departureStationId, Long arrivalStationId, Long cost) {
-        this.id = id;
-        this.departureStationId = departureStationId;
-        this.arrivalStationId = arrivalStationId;
-        this.cost = cost;
-    }
 
     public Long getId() {
         return id;
@@ -33,19 +39,19 @@ public class Ticket {
         this.id = id;
     }
 
-    public Long getDepartureStationId() {
+    public StationInformation getDepartureStationId() {
         return departureStationId;
     }
 
-    public void setDepartureStationId(Long departureStationId) {
+    public void setDepartureStationId(StationInformation departureStationId) {
         this.departureStationId = departureStationId;
     }
 
-    public Long getArrivalStationId() {
+    public StationInformation getArrivalStationId() {
         return arrivalStationId;
     }
 
-    public void setArrivalStationId(Long arrivalStationId) {
+    public void setArrivalStationId(StationInformation arrivalStationId) {
         this.arrivalStationId = arrivalStationId;
     }
 
@@ -55,5 +61,52 @@ public class Ticket {
 
     public void setCost(Long cost) {
         this.cost = cost;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public Ticket(StationInformation departureStationId,
+                  StationInformation arrivalStationId,
+                  Long cost, String firstName,
+                  String secondName, Train train,
+                  User user) {
+        this.id = id;
+        this.departureStationId = departureStationId;
+        this.arrivalStationId = arrivalStationId;
+        this.cost = cost;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.train = train;
+        this.user = user;
+    }
+
+    public Train getTrain() {
+        return train;
+    }
+
+    public void setTrain(Train train) {
+        this.train = train;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

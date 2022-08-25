@@ -18,6 +18,10 @@ public class Train {
     @JoinColumn(name = "train_id")
     private List<Ticket> tickets = new ArrayList<>();
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="route_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Route route;
+
     public Train(Long id, Date date, List<Ticket> tickets) {
         this.id = id;
         this.date = date;
@@ -48,5 +52,9 @@ public class Train {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Route getRoute() {
+        return route;
     }
 }

@@ -1,7 +1,11 @@
 package com.ahinski.website.controllers;
 
 import com.ahinski.website.models.Route;
+import com.ahinski.website.models.Station;
+import com.ahinski.website.models.StationInformation;
 import com.ahinski.website.repo.RouteRepository;
+import com.ahinski.website.repo.StationInformationRepository;
+import com.ahinski.website.repo.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,8 @@ public class RoutesController {
 
     @Autowired
     private RouteRepository routeRepository;
+    @Autowired
+    private StationRepository stationRepository;
 
     @GetMapping("/routes")
     public String routesMain(Model model) {
@@ -30,7 +36,13 @@ public class RoutesController {
         Optional<Route> routesOptional = routeRepository.findById(id);
         List<Route> route = new ArrayList<>();
         routesOptional.ifPresent(route :: add);
-        model.addAttribute("routes", route);
+        model.addAttribute("route", route);
+        List<Station> names = new ArrayList<>();
+        List<StationInformation> stationInformations = route.get(0).getStationInformationList();
+        for(StationInformation s : stationInformations)
+            names.add(s.getStation());
+        model.addAttribute("station", stationInformations);
+        model.addAttribute("names", names);
         return "routes-details";
     }
 

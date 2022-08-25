@@ -10,9 +10,13 @@
 
 <div class="container mt-5">
     <h1>Tickets</h1>
-    <div th:each="el : ${tickets}" class="alert alert-info mt-2">
-        <h3 th:text="${el.id}"/>
-        <a th:ref="'/stations/'+${el.id}" class="btn btn-warning">Подробнее</a>
+    <div th:each="el, count : ${tickets}" class="alert alert-info mt-2">
+        <h3 th:text="${el.getTrain().date}"/>
+        <h3 th:text="${el.getDepartureStationId().getStation().name}"/>
+        <h3 th:text="${el.getArrivalStationId().getStation().name}"/>
+        <h3 th:text="${el.getFirstName()}"/>
+        <h3 th:text="${el.getSecondName()}"/>
+        <h3 th:text="${el.getCost()}"/>
     </div>
 
 </div>

@@ -1,0 +1,1 @@
+INSERT INTO aa_railways.train (id, date, route_id) VALUE (1, '2022-08-22 22:00:00', 1);
